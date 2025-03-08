@@ -48,17 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="css/style.css">
     <title>Register</title>
-    <style>
-        .error {
-            color: red;
-            margin-bottom: 10px;
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
+<body class="login-register-body">
+    <div class="login-register-container">
         <h2>Register</h2>
         <?php if (!empty($error)): ?>
             <div class="error"><?php echo $error; ?></div>

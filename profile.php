@@ -157,10 +157,10 @@ $conn->close();
                         <?php endif; ?>
                     </div>
 
-                    <div id="personal-<?php echo $personal_info['id']; ?>">
+                    <div id="personal-<?php echo htmlspecialchars($personal_info['id'] ?? ''); ?>">
                         <h2>
                             <?php echo !empty($personal_info['full_name']) ? htmlspecialchars($personal_info['full_name']) : 'Update your personal information'; ?>
-                            <span class="edit-icon" data-type="personal" data-id="personal-<?php echo $personal_info['id']; ?>">✏️</span>
+                            <span class="edit-icon" data-type="personal" data-id="personal-<?php echo htmlspecialchars($personal_info['id'] ?? ''); ?>">✏️</span>
                         </h2>
                         <?php if (!empty($personal_info['designation'])): ?>
                             <div class="designation">
@@ -220,7 +220,7 @@ $conn->close();
 
             <!-- Career Objective Section -->
             <div class="section">
-                <div class="section-header">Career Objective <span class="edit-icon" data-type="objective" data-id="objective-<?php echo $personal_info['id']; ?>">✏️</span></div>
+                <div class="section-header">Career Objective <span class="edit-icon" data-type="objective" data-id="objective-<?php echo htmlspecialchars($personal_info['id'] ?? ''); ?>">✏️</span></div>
                 <div class="section-content">
                     <div class="entry" id="career-objective-1">
                         <div class="entry-content">
