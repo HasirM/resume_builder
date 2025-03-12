@@ -13,16 +13,7 @@ $user_id = $_SESSION['user_id'];
 
 
 // Database connection
-$servername = "localhost";
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "resume_builder"; // Replace with your database name
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db.php';
 
 // Fetch personal info
 $personal_info = [];

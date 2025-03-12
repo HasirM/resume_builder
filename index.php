@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Resume Builder</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style1.css">
 </head>
 
 <body>
@@ -69,9 +69,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="template-grid">
                 <!-- Template 1 -->
                 <div class="template-card" onclick="showButtons(this)">
-                    <img src="uploads/templates/1.jpg" alt="Template 1">
+                    <img src="uploads/templates/1.webp" alt="Template 1">
                     <div class="overlay">
-                        <div class="overlay-text" onclick="openModal('uploads/templates/1.jpg')">
+                        <div class="overlay-text" onclick="openModal('uploads/templates/1.webp')">
                             <i class="fas fa-user"></i> Preview
                         </div>
                         <div class="overlay-text" onclick="window.location.href='download_pdf.php?template=1';">
@@ -81,9 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <!-- Template 2 -->
                 <div class="template-card" onclick="showButtons(this)">
-                    <img src="uploads/templates/2.jpg" alt="Template 2">
+                    <img src="uploads/templates/2.webp" alt="Template 2">
                     <div class="overlay">
-                        <div class="overlay-text" onclick="openModal('uploads/templates/2.jpg')">
+                        <div class="overlay-text" onclick="openModal('uploads/templates/2.webp')">
                             <i class="fas fa-eye"></i> Preview
                         </div>
                         <div class="overlay-text" onclick="window.location.href='download_pdf.php?template=2';">
@@ -93,9 +93,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <!-- Template 3 -->
                 <div class="template-card" onclick="showButtons(this)">
-                    <img src="uploads/templates/3.jpg" alt="Template 3">
+                    <img src="uploads/templates/3.webp" alt="Template 3">
                     <div class="overlay">
-                        <div class="overlay-text" onclick="openModal('uploads/templates/3.jpg')">
+                        <div class="overlay-text" onclick="openModal('uploads/templates/3.webp')">
                             <i class="fas fa-eye"></i> Preview
                         </div>
                         <div class="overlay-text" onclick="window.location.href='download_pdf.php?template=3';">
@@ -105,9 +105,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <!-- Template 4 -->
                 <div class="template-card" onclick="showButtons(this)">
-                    <img src="uploads/templates/4.jpg" alt="Template 4">
+                    <img src="uploads/templates/4.webp" alt="Template 4">
                     <div class="overlay">
-                        <div class="overlay-text" onclick="openModal('uploads/templates/4.jpg')">
+                        <div class="overlay-text" onclick="openModal('uploads/templates/4.webp')">
                             <i class="fas fa-eye"></i> Preview
                         </div>
                         <div class="overlay-text" onclick="window.location.href='download_pdf.php?template=4';">
@@ -117,9 +117,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <!-- Template 5 -->
                 <div class="template-card" onclick="showButtons(this)">
-                    <img src="uploads/templates/5.jpg" alt="Template 5">
+                    <img src="uploads/templates/5.webp" alt="Template 5">
                     <div class="overlay">
-                        <div class="overlay-text" onclick="openModal('uploads/templates/5.jpg')">
+                        <div class="overlay-text" onclick="openModal('uploads/templates/5.webp')">
                             <i class="fas fa-eye"></i> Preview
                         </div>
                         <div class="overlay-text" onclick="window.location.href='download_pdf.php?template=5';">

@@ -1,18 +1,7 @@
 <?php
 session_start(); // Start the session
 
-// Database connection
-$host = 'localhost';
-$dbname = 'resume_builder';
-$username = 'root';
-$password = '';
-
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
+include '../db.php';
 
 // Get user_id from session
 $user_id = $_SESSION['user_id'];
@@ -30,19 +19,19 @@ $personal_info = [
 ];
 
 try {
-    $stmt = $conn->prepare("SELECT * FROM personal_info WHERE user_id = :user_id");
-    $stmt->bindParam(':user_id', $user_id);
+    $stmt = $conn->prepare("SELECT * FROM personal_info WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id); // "i" for integer
     $stmt->execute();
-    $fetched_personal_info = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->get_result();
+    $fetched_personal_info = $result->fetch_assoc();
 
     if ($fetched_personal_info) {
         $personal_info = array_merge($personal_info, $fetched_personal_info);
     }
-} catch (PDOException $e) {
+} catch (mysqli_sql_exception $e) {
     // Log error and continue with default values
     error_log("Error fetching personal info: " . $e->getMessage());
 }
-
 
 // Fetch certificates (with default empty array)
 $certificates = [];
@@ -56,12 +45,13 @@ try {
             COALESCE(description, 'Certificate description goes here.') AS description, 
             certificate_url
         FROM certificates 
-        WHERE user_id = :user_id
+        WHERE user_id = ?
     ");
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bind_param("i", $user_id); // "i" for integer
     $stmt->execute();
-    $certificates = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+    $result = $stmt->get_result();
+    $certificates = $result->fetch_all(MYSQLI_ASSOC);
+} catch (mysqli_sql_exception $e) {
     // Log error and continue with empty array
     error_log("Error fetching certificates: " . $e->getMessage());
 }
@@ -81,12 +71,13 @@ try {
             start_date, 
             end_date 
         FROM work_experience 
-        WHERE user_id = :user_id
+        WHERE user_id = ?
     ");
-    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bind_param("i", $user_id); // "i" for integer
     $stmt->execute();
-    $work_experience = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+    $result = $stmt->get_result();
+    $work_experience = $result->fetch_all(MYSQLI_ASSOC);
+} catch (mysqli_sql_exception $e) {
     // Log error and continue with empty array
     error_log("Error fetching work experience: " . $e->getMessage());
 }
@@ -104,12 +95,13 @@ try {
             start_year, 
             end_year 
         FROM education 
-        WHERE user_id = :user_id
+        WHERE user_id = ?
     ");
-    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bind_param("i", $user_id); // "i" for integer
     $stmt->execute();
-    $education = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+    $result = $stmt->get_result();
+    $education = $result->fetch_all(MYSQLI_ASSOC);
+} catch (mysqli_sql_exception $e) {
     // Log error and continue with empty array
     error_log("Error fetching education: " . $e->getMessage());
 }
@@ -124,12 +116,13 @@ try {
             COALESCE(language, 'Language') AS language, 
             COALESCE(proficiency, 'Proficiency') AS proficiency 
         FROM languages 
-        WHERE user_id = :user_id
+        WHERE user_id = ?
     ");
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bind_param("i", $user_id); // "i" for integer
     $stmt->execute();
-    $languages = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+    $result = $stmt->get_result();
+    $languages = $result->fetch_all(MYSQLI_ASSOC);
+} catch (mysqli_sql_exception $e) {
     // Log error and continue with empty array
     error_log("Error fetching languages: " . $e->getMessage());
 }
@@ -144,12 +137,13 @@ try {
             COALESCE(area_of_expertise, 'Skill Category') AS area_of_expertise, 
             COALESCE(skills_acquired, 'Skill Details') AS skills_acquired 
         FROM skills 
-        WHERE user_id = :user_id
+        WHERE user_id = ?
     ");
-    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bind_param("i", $user_id); // "i" for integer
     $stmt->execute();
-    $skills = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+    $result = $stmt->get_result();
+    $skills = $result->fetch_all(MYSQLI_ASSOC);
+} catch (mysqli_sql_exception $e) {
     // Log error and continue with empty array
     error_log("Error fetching skills: " . $e->getMessage());
 }
@@ -169,12 +163,13 @@ try {
             end_month, 
             end_year 
         FROM projects 
-        WHERE user_id = :user_id
+        WHERE user_id = ?
     ");
-    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bind_param("i", $user_id); // "i" for integer
     $stmt->execute();
-    $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+    $result = $stmt->get_result();
+    $projects = $result->fetch_all(MYSQLI_ASSOC);
+} catch (mysqli_sql_exception $e) {
     // Log error and continue with empty array
     error_log("Error fetching projects: " . $e->getMessage());
 }
@@ -188,12 +183,13 @@ try {
             user_id, 
             COALESCE(image, 'user.jpeg') AS image -- Default image if none is set
         FROM profile_images 
-        WHERE user_id = :user_id
+        WHERE user_id = ?
     ");
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bind_param("i", $user_id); // "i" for integer
     $stmt->execute();
-    $profile_image = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch a single row
-} catch (PDOException $e) {
+    $result = $stmt->get_result();
+    $profile_image = $result->fetch_assoc(); // Fetch a single row
+} catch (mysqli_sql_exception $e) {
     // Log error and continue with default image
     error_log("Error fetching profile image: " . $e->getMessage());
     $profile_image = ['image' => 'default-profile.jpg']; // Fallback to default image
